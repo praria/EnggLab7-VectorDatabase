@@ -60,7 +60,7 @@ class VectorSearchEngine:
 
         else:
             top_indices = cosine_similarity(self.embeddings, query_embedding, top_k)
-            print(f"Cosine Similarity matches: {top_indices}")
+            print(f"Cosine Similarity matches - top indices: {top_indices}")
             return [self.docs[i] for i in top_indices]
 
     def _get_minhash(self, vector):

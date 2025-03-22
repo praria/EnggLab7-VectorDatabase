@@ -25,7 +25,8 @@ def main():
     if not docs:
         print("No documents found. Exiting.")
         return
-
+    
+    # embeds and indexes the document for similarity search
     search_engine.from_docs(docs)
 
     print("\nWelcome to the lesson about Opportunity Cost Q&A Bot!")
