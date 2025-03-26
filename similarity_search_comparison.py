@@ -5,7 +5,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 from datasketch import MinHash, MinHashLSH
 from sentence_transformers import SentenceTransformer
 
-# Load Pretrained SBERT Model
 model = SentenceTransformer("all-MiniLM-L6-v2")
 docs = [
     "Machine learning is amazing.",

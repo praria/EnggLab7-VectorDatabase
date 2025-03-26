@@ -3,7 +3,7 @@ from scipy.spatial import KDTree
 from datasketch import MinHash, MinHashLSH
 from cosine_dotproduct import cosine_similarity
 
-class VectorSearchEngine:
+class VectorSearchEngine:    
     def __init__(self, embedder, method="cosine"):
         self.embedder = embedder
         self.docs = []
@@ -14,7 +14,7 @@ class VectorSearchEngine:
         self.minhashes = []
 
     def from_docs(self, docs):
-        """Encodes documents into embeddings and initializes the selected search method."""
+        """Encodes documents into embeddings and builds the selected search index for kd_tree or lsh."""
         self.docs = docs
         self.embeddings = np.array(self.embedder.encode(docs))  
         
@@ -33,7 +33,7 @@ class VectorSearchEngine:
             print(f"LSH index built with {len(self.docs)} documents.")
 
     def similarity_search(self, query, top_k=5):
-        """Performs similarity search using the selected method."""
+        """converts the query into an embedding, does search using the selected method and returns the top matches."""
         if len(self.docs) == 0:
             print("No documents available.")
             return []
@@ -64,7 +64,7 @@ class VectorSearchEngine:
             return [self.docs[i] for i in top_indices]
 
     def _get_minhash(self, vector):
-        """Convert a dense embedding vector into a MinHash signature."""
+        """Converts an embedding vector into a MinHash signature for LSH indexing."""
         minhash = MinHash(num_perm=256)
         
         # Convert continuous vector into binary representation (sign bit hashing)

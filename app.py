@@ -29,7 +29,7 @@ def main():
     # embeds and indexes the document for similarity search
     search_engine.from_docs(docs)
 
-    print("\nWelcome to the lesson about Opportunity Cost Q&A Bot!")
+    print("\nWelcome to Q&A Bot!")
     print("Ask anything about the document. Type '/bye' to exit.")
 
     while True:
