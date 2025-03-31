@@ -11,8 +11,7 @@ def ask_ollama(prompt, model="llama2:7b"):
         print("Raw API Response:", response.text)  
 
         output = response.json()
-
-        # Ensure the response contains expected data
+        
         if isinstance(output, dict) and "response" in output:
             return output["response"]
 

@@ -11,20 +11,25 @@ def load_documents(file_path):
         print(f"Error loading documents: {e}")
         return []
 
+
+
 def main():
-    # Load the embedding model and initialize VectorSearchEngine
+    search_method = input("Choose search method (cosine/kd_tree/lsh): ").strip().lower()
+
+    # Load embedding model
     embedder = SentenceTransformer("all-MiniLM-L6-v2")
-    search_engine = VectorSearchEngine(embedder)
+    search_engine = VectorSearchEngine(embedder, method=search_method)
 
     # Load documents from file
     docs = load_documents("example/opportunityCost.txt")
     if not docs:
         print("No documents found. Exiting.")
         return
-
+    
+    # embeds and indexes the document for similarity search
     search_engine.from_docs(docs)
 
-    print("\nWelcome to the lesson about Opportunity Cost Q&A Bot!")
+    print("\nWelcome to Q&A Bot!")
     print("Ask anything about the document. Type '/bye' to exit.")
 
     while True:
@@ -46,6 +51,7 @@ def main():
         answer = ask_ollama(prompt)
         print("\nAI Response:")
         print(answer)
+
 
 if __name__ == "__main__":
     main()
